@@ -91,9 +91,9 @@ public class MovieController {
 			int count = repo.updateName(newName, id); // Needs JPA query
 
 			if (count > 0) {
-				return ResponseEntity.status(200).body("Major updated");
+				return ResponseEntity.status(200).body("Movie title updated");
 			}
 		}
-		return ResponseEntity.status(400).body("Couldn't update major");
+		return ResponseEntity.status(400).body("Couldn't update title");
 	}
 }
