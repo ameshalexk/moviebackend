@@ -33,7 +33,7 @@ public class MovieController {
 	}
 
 	@GetMapping("/movie/{id}")
-	public ResponseEntity<?> getMovieById(@PathVariable int id) {
+	public ResponseEntity<?> getMovieById(@PathVariable Long id) {
 
 		Optional<Movie> movie = repo.findById(id);
 
@@ -45,7 +45,7 @@ public class MovieController {
 	}
 
 	@DeleteMapping("/movie/{id}")
-	public ResponseEntity<?> deleteMovie(@PathVariable int id) {
+	public ResponseEntity<?> deleteMovie(@PathVariable Long id) {
 
 		if (repo.existsById(id)) {
 
@@ -84,7 +84,7 @@ public class MovieController {
 	}
 
 	@PatchMapping("/movie/update/name")
-	public ResponseEntity<?> updateName(@PathParam(value = "id") int id, @PathParam(value = "name") String newName) {
+	public ResponseEntity<?> updateName(@PathParam(value = "id") Long id, @PathParam(value = "name") String newName) {
 
 		if (repo.existsById(id)) {
 
