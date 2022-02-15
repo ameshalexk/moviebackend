@@ -116,3 +116,6 @@ nb-configuration.xml
 ## OS X
 ##############################
 .DS_Store
+
+### Sensitive Data ###
+src/main/resources/application.properties
