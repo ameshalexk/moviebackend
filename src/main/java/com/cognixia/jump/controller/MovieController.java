@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.model.Movie;
-import com.cognixia.jump.model.Student;
 import com.cognixia.jump.repository.MovieRepository;
 
 @RequestMapping("/api")
@@ -89,14 +88,12 @@ public class MovieController {
 
 		if (repo.existsById(id)) {
 
-			int count = repo.updateTitle(newTitle, id); //Needs JPA query
+			int count = repo.updateTitle(newTitle, id); // Needs JPA query
 
 			if (count > 0) {
 				return ResponseEntity.status(200).body("Major updated");
 			}
-
-			return ResponseEntity.status(400).body("Couldn't update major");
 		}
-
+		return ResponseEntity.status(400).body("Couldn't update major");
 	}
 }

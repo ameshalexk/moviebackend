@@ -15,5 +15,11 @@ import com.cognixia.jump.model.Movie;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer>{
 	
+	// @Query -> write out custom query
+		// @Transactional & @Modifying -> create a custom query that will UPDATE/DELETE/INSERT
+		@Transactional
+		@Modifying
+		@Query("UPDATE Movie m SET m.title = :title WHERE m.id = :id")
+		public int updateTitle(@Param(value="title") String title, @Param(value="id") int id );
 
 }
