@@ -6,11 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.UsersMovie;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
-	
-	
-	public Optional<User> findByUsername(String username);
+public interface UserMovieRepository extends JpaRepository<UsersMovie, Long> {
 
 }
