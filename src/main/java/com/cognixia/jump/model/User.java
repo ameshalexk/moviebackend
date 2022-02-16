@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
 @Entity
@@ -48,7 +50,8 @@ public class User implements Serializable {
 	private Role role;
 	
 //	@JsonManagedReference
-	@JsonIgnoreProperties
+//	@JsonIgnoreProperties
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<UsersMovie> usermovies;
 

@@ -15,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -48,7 +50,8 @@ public class Movie implements Serializable {
 	private String publishedYear;
 	
 //	@JsonManagedReference
-	@JsonIgnoreProperties
+//	@JsonIgnoreProperties
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	private List<UsersMovie> usermovies;
 	
