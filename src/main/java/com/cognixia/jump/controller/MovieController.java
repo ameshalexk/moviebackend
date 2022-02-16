@@ -84,11 +84,11 @@ public class MovieController {
 	}
 
 	@PatchMapping("/movie/update/name")
-	public ResponseEntity<?> updateName(@PathParam(value = "id") Long id, @PathParam(value = "name") String newName) {
+	public ResponseEntity<?> updateName(@PathParam(value = "id") Long id, @PathParam(value = "name") String name) {
 
 		if (repo.existsById(id)) {
 
-			int count = repo.updateName(newName, id); // Needs JPA query
+			int count = repo.updateName(name, id); // Needs JPA query
 
 			if (count > 0) {
 				return ResponseEntity.status(200).body("Movie title updated");
@@ -96,4 +96,6 @@ public class MovieController {
 		}
 		return ResponseEntity.status(400).body("Couldn't update title");
 	}
+	
+	
 }
