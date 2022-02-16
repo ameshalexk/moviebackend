@@ -60,14 +60,14 @@ public class MovieController {
 
 	}
 
-	@PostMapping("/student")
+	@PostMapping("/movie")
 	public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
 
 		// movie.setId(-1); Not necessary I think
 
 		Movie added = repo.save(movie);
 
-		return ResponseEntity.status(201).header("student id", added.getId() + "").body(added);
+		return ResponseEntity.status(201).header("Movie id", added.getId() + "").body(added);
 
 	}
 
