@@ -15,8 +15,6 @@ import com.cognixia.jump.model.Movie;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long>{
 	
-	// @Query -> write out custom query
-		// @Transactional & @Modifying -> create a custom query that will UPDATE/DELETE/INSERT
 		@Transactional
 		@Modifying
 		@Query("UPDATE Movie m SET m.name = :name WHERE m.id = :id")
