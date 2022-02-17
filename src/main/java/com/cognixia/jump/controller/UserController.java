@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,9 @@ public class UserController {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	UserDetailsService userDetailsService;
 	
 	@Autowired
 	JwtUtil jwtUtil;
@@ -74,7 +78,7 @@ public class UserController {
 			// as long as user is found, we can create the JWT
 			
 			// find the user
-			final UserDetails userDetails = repo.loadUserByUsername(request.getUsername());
+			final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
 			
 			// generate token for this user
 			final String jwt = jwtUtil.generateTokens(userDetails);
