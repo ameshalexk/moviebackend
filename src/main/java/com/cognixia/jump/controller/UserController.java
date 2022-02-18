@@ -50,8 +50,6 @@ public class UserController {
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		user.setId(null);
 		
-//		user.setPassword(encoder.encode(user.getPassword()));
-		
 		User created = repo.save(user);
 		
 		return ResponseEntity.status(201).body(created);
