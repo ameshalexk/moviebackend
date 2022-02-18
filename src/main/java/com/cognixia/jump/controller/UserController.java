@@ -9,7 +9,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,8 +29,8 @@ public class UserController {
 	@Autowired
 	UserRepository repo;
 	
-//	@Autowired
-//	PasswordEncoder encoder;
+	@Autowired
+	PasswordEncoder encoder;
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -48,11 +48,15 @@ public class UserController {
 	
 	@PostMapping("/user")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
+		System.out.println("craeted *****1");
+
 		user.setId(null);
 		
-//		user.setPassword(encoder.encode(user.getPassword()));
+		user.setPassword(encoder.encode(user.getPassword()));
 		
 		User created = repo.save(user);
+		
+		System.out.println("craeted *****2"+ created);
 		
 		return ResponseEntity.status(201).body(created);
 	}

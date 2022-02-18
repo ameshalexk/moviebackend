@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,10 +41,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		
 		// new way to remove password encoding
-		//return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		
+//		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return new BCryptPasswordEncoder();
+
 		// use old way to set up encoding, new way above will cause issues
-		return NoOpPasswordEncoder.getInstance();
+//		return NoOpPasswordEncoder.getInstance();
 	}
 	
 	
@@ -55,7 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/api/authenticate").permitAll() // permit anyone to create jwts
+			.antMatchers(HttpMethod.POST, "/api/user").permitAll()
+//			.antMatchers("/api/authenticate").permitAll() // permit anyone to create jwts
 			.antMatchers("/api/movie").hasAnyRole("ADMIN", "USER", "DEV")
 			.antMatchers("/**").hasRole("ADMIN") // admin has access to any of the APIs not stated above
 			.antMatchers(HttpMethod.GET, "/api/user" ).permitAll() // any user can use GET
