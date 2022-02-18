@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.cognixia.jump.model.User;
+import com.cognixia.jump.service.MyUserDetailsService;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
@@ -14,6 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	public Optional<User> findByUsername(String username);
 
-//	public UserDetails loadUserByUsername(String username);
+//	public MyUserDetailsService loadUserByUsername(String username);
 
 }
