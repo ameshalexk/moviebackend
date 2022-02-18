@@ -54,14 +54,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure( HttpSecurity http ) throws Exception {
 		
-		
+		http.cors().disable();
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/api/user").permitAll()
+//			.antMatchers(HttpMethod.POST, "/api/user").permitAll()
 			.antMatchers("/api/authenticate").permitAll() // permit anyone to create jwts
+			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //			.antMatchers("/api/movie").permitAll()
 //			.antMatchers("/**").hasRole("ADMIN") // admin has access to any of the APIs not stated above
-			.antMatchers(HttpMethod.GET, "/api/user" ).permitAll() // any user can use GET
+//			.antMatchers(HttpMethod.GET, "/api/user" ).permitAll() // any user can use GET
 			.anyRequest().authenticated()
 //			.and().httpBasic() // allow for basic auth.
 			.and().sessionManagement()								    // tell spring security not to create any session,
