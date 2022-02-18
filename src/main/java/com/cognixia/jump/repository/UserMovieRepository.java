@@ -11,4 +11,5 @@ import com.cognixia.jump.model.UsersMovie;
 @Repository
 public interface UserMovieRepository extends JpaRepository<UsersMovie, Long> {
 
+	//public Optional<UsersMovie> findByUsersMovie(UsersMovie usersMovie);
 }

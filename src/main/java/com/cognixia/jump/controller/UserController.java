@@ -52,8 +52,10 @@ public class UserController {
 
 		user.setId(null);
 		
+
 		user.setPassword(encoder.encode(user.getPassword()));
 		
+
 		User created = repo.save(user);
 		
 		System.out.println("craeted *****2"+ created);
