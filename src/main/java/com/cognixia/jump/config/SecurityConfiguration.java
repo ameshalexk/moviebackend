@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers(HttpMethod.POST, "/api/user").permitAll()
 			.antMatchers("/api/authenticate").permitAll() // permit anyone to create jwts
-			.antMatchers("/api/movie").permitAll()
+//			.antMatchers("/api/movie").permitAll()
 //			.antMatchers("/**").hasRole("ADMIN") // admin has access to any of the APIs not stated above
 			.antMatchers(HttpMethod.GET, "/api/user" ).permitAll() // any user can use GET
 			.anyRequest().authenticated()
