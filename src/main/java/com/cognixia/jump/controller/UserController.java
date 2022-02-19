@@ -1,6 +1,7 @@
 package com.cognixia.jump.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,15 +12,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.AuthenticationRequest;
 import com.cognixia.jump.model.AuthenticationResponse;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.UserRepository;
+import com.cognixia.jump.service.MyUserDetailsService;
 import com.cognixia.jump.util.JwtUtil;
 
 @RequestMapping("/api")
@@ -40,12 +44,25 @@ public class UserController {
 	
 	@Autowired
 	JwtUtil jwtUtil;
+
 	
 	@GetMapping("/user")
 	public List<User> getUsers() {
 		return repo.findAll();
 	}
 	
+	@GetMapping("/user/{id}")
+	public ResponseEntity<User> getUser(@PathVariable long id) throws ResourceNotFoundException {
+		
+		Optional<User> found = repo.findById(id);
+		
+		if(found.isEmpty()) {
+			throw new ResourceNotFoundException("User with id = " + id + " was not found");
+		}
+		
+		return ResponseEntity.status(200).body(found.get());
+	}
+		
 	@PostMapping("/user")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		System.out.println("craeted *****1");
