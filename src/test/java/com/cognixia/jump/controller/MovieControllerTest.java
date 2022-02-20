@@ -16,11 +16,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.cognixia.jump.config.SecurityConfiguration;
+import com.cognixia.jump.filter.JwtRequestFilter;
 import com.cognixia.jump.model.Movie;
+import com.cognixia.jump.repository.MovieRepository;
+import com.cognixia.jump.service.MyUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(SpringExtension.class)
@@ -32,11 +39,11 @@ public class MovieControllerTest {
 	@Autowired
 	private MockMvc mvc;
 
-	@MockBean
+	@InjectMocks
 	private MovieController service;
 	
-	@InjectMocks
-	private MovieController controller;
+	@MockBean
+	private MovieRepository movieRepo;
 
 	@Test
 	void testGetAllMovies() throws Exception {
@@ -52,7 +59,7 @@ public class MovieControllerTest {
 		// when service.getAllMovies() is called within the controller
 		// instead of actually running the method, just make sure it returns the
 		// allMovies list
-		when(controller.getMovies()).thenReturn(allMovies);
+		when(movieRepo.findAll()).thenReturn(allMovies);
 
 		mvc.perform(get(uri)) // perform the get request
 				// .andDo( print() ) // print the request sent and response given
