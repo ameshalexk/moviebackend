@@ -33,7 +33,6 @@ public class UsersMovieController {
 
 		return ResponseEntity.status(201).header("MovieUsers id", added.getId() + "").body(added);
 
-		
 	}
 
 }
