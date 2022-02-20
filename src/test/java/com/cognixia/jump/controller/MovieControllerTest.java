@@ -16,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,6 +32,9 @@ public class MovieControllerTest {
 	@Autowired
 	private MockMvc mvc;
 
+	@MockBean
+	private MovieController service;
+	
 	@InjectMocks
 	private MovieController controller;
 
@@ -63,8 +67,8 @@ public class MovieControllerTest {
 				.andExpect(jsonPath("$[1].genre").value(allMovies.get(1).getGenre()));
 
 		// verify -> check how many interactions with code there are
-		verify(controller, times(1)).getMovies(); // getAllMovies() called once from service
-		verifyNoMoreInteractions(controller); // after checking above, check service is no longer being used
+		verify(service, times(1)).getMovies(); // getAllMovies() called once from service
+		verifyNoMoreInteractions(service); // after checking above, check service is no longer being used
 	}
 
 	// format an object of any type to a json string
