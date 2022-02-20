@@ -57,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.cors().disable();
 		http.csrf().disable()
 			.authorizeRequests()
-//			.antMatchers(HttpMethod.POST, "/api/user").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/user").permitAll()
 			.antMatchers("/api/authenticate").permitAll() // permit anyone to create jwts
 			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //			.antMatchers("/api/movie").permitAll()

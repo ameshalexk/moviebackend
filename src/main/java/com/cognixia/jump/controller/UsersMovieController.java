@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,18 @@ public class UsersMovieController {
 		return ResponseEntity.status(200).body(usermovie);
 	}
 	
+//	@GetMapping("/usersmovie/{id}")
+//	public ResponseEntity<?> findByIdOne(@PathVariable String id) {
+//
+//		List<UsersMovie> usermovie = (List<UsersMovie>) repo.findByIdOne(id);
+//
+//		if (usermovie == null) {
+//			return ResponseEntity.status(404).body("Could not find usermovie.");
+//		}
+//
+//		return ResponseEntity.status(200).body(usermovie);
+//	}
+//	
 	@PostMapping("/usersmovie")
 	public ResponseEntity<UsersMovie> addUserMovie(@RequestBody UsersMovie usersMovie) {
 		usersMovie.setId(-1L);
@@ -52,5 +65,25 @@ public class UsersMovieController {
 		
 	}
 	
+//	@PostMapping("/usersmoviecustom")
+//	public ResponseEntity<?> insertMovie(@PathParam(value="id") int id, @PathParam(value="lastname") String lastname) {
+//		boolean updated = service.updateLastname(id, lastname);
+//		System.out.println(lastname + "check" + id);
+//
+//		if (updated) {
+//			return ResponseEntity.status(200).body("Last name updated");
+//		}
+//		return ResponseEntity.status(400).body("Could not update Last name");
+//
+//	}
+
+
+		@DeleteMapping("/usersmovie/{id}")
+	public ResponseEntity<?> deleteMovie(@PathVariable Long id) {
+			repo.deleteUsersByUsersId(id);
+
+			return ResponseEntity.status(200).body(true);
+		
+	}
 
 }

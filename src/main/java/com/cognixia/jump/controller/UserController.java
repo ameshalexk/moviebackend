@@ -51,13 +51,25 @@ public class UserController {
 		return repo.findAll();
 	}
 	
-	@GetMapping("/user/{id}")
-	public ResponseEntity<User> getUser(@PathVariable long id) throws ResourceNotFoundException {
+//	@GetMapping("/user/{id}")
+//	public ResponseEntity<User> getUser(@PathVariable long id) throws ResourceNotFoundException {
+//		
+//		Optional<User> found = repo.findById(id);
+//		
+//		if(found.isEmpty()) {
+//			throw new ResourceNotFoundException("User with id = " + id + " was not found");
+//		}
+//		
+//		return ResponseEntity.status(200).body(found.get());
+//	}
+	
+	@GetMapping("/user/{username}")
+	public ResponseEntity<User> getUser(@PathVariable String username) throws ResourceNotFoundException {
 		
-		Optional<User> found = repo.findById(id);
+		Optional<User> found = repo.findByUsername(username);
 		
 		if(found.isEmpty()) {
-			throw new ResourceNotFoundException("User with id = " + id + " was not found");
+			throw new ResourceNotFoundException("User with username = " + username + " was not found");
 		}
 		
 		return ResponseEntity.status(200).body(found.get());

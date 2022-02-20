@@ -13,7 +13,7 @@ import com.cognixia.jump.service.MyUserDetailsService;
 public interface UserRepository extends JpaRepository<User, Long>{
 	
 	
-	public Optional<User> findByUsername(String username);
+	public Optional<User> findByUsername(String username); 
 
 //	public MyUserDetailsService loadUserByUsername(String username);
 
